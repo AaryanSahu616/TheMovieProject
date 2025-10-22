@@ -73,11 +73,11 @@ class CustomLoginView(LoginView):
     def dispatch(self, request, *args, **kwargs):
         # If already logged in, redirect to /movies/
         if request.user.is_authenticated:
-            return redirect(reverse_lazy("movies_page"))
+            return redirect(reverse_lazy("movie_list_template"))
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse_lazy("movies_page")
+        return reverse_lazy("movie_list_template")
 
 class RegisterPageView(TemplateView):
     template_name = "accounts/register.html"
@@ -85,7 +85,7 @@ class RegisterPageView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         # If user is already logged in, redirect to movies
         if request.user.is_authenticated:
-            return redirect("movies_page")
+            return redirect("movie_list_template")
         return super().dispatch(request, *args, **kwargs)   
 
 class ProfilePageView(LoginRequiredMixin, TemplateView):
