@@ -25,6 +25,9 @@ media/*
 media/posters/*
 !media/posters/no-poster.png
 
+TheMovieProject/media/posters/*
+!TheMovieProject/media/posters/no-poster.png
+
 # Environment
 .env
 .venv/
