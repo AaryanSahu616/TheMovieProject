@@ -37,7 +37,7 @@ document.getElementById("logoutBtn").addEventListener("click", async function ()
     headers: { "X-CSRFToken": csrftoken }
   });
   if (response.ok) {
-    window.location.href = "/login-page/";
+    window.location.href = "/";
   }
 });
 

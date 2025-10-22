@@ -8,6 +8,12 @@ from django.utils.decorators import method_decorator
 from .models import User
 from .serializers import UserSerializer
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
+from django.contrib.auth import get_user_model
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 
 
 class RegisterAPIView(APIView):
@@ -60,3 +66,35 @@ class ProfileAPIView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class CustomLoginView(LoginView):
+    template_name = "accounts/login.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        # If already logged in, redirect to /movies/
+        if request.user.is_authenticated:
+            return redirect(reverse_lazy("movies_page"))
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy("movies_page")
+
+class RegisterPageView(TemplateView):
+    template_name = "accounts/register.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        # If user is already logged in, redirect to movies
+        if request.user.is_authenticated:
+            return redirect("movies_page")
+        return super().dispatch(request, *args, **kwargs)   
+
+class ProfilePageView(LoginRequiredMixin, TemplateView):
+    template_name = "accounts/profile.html"
+    login_url = "/api/login/"  # redirect here if not logged in
+
+    # Optional: you can override get_context_data if you need user info
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
+
