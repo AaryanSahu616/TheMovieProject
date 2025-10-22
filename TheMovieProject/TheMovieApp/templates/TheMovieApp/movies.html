@@ -33,8 +33,8 @@
                 <div class="col-md-4 mb-4">
                     <div class="card movie-card h-100">
                         {% if movie.poster %}
-                            {% comment %} <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" class="movie-poster"> {% endcomment %}
-                            <img src="{{ movie.poster }}" alt="{{ movie.title }}" class="movie-poster">
+                            <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" class="movie-poster">
+                            {% comment %} <img src="{{ movie.poster }}" alt="{{ movie.title }}" class="movie-poster"> {% endcomment %}
                         {% else %}
                             <img src="{% static 'default_poster.jpg' %}" alt="No poster" class="movie-poster">
                         {% endif %}

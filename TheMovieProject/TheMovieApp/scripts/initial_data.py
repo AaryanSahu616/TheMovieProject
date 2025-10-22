@@ -31,18 +31,17 @@ def get_poster_url(title, year=None):
         if poster and poster != "N/A":
             # Download and save locally
             poster_response = requests.get(poster, timeout=5)
-            # print(poster_response.url)
-            # if poster_response.status_code == 200:
-            #     file_name = f"{title.replace(' ', '_')}.jpg"
-            #     file_path = os.path.join(settings.MEDIA_ROOT, "posters", file_name)
+            if poster_response.status_code == 200:
+                file_name = f"{title.replace(' ', '_')}.jpg"
+                file_path = os.path.join(settings.MEDIA_ROOT, "posters", file_name)
 
-            #     os.makedirs(os.path.dirname(file_path), exist_ok=True)
-            #     with open(file_path, "wb") as f:
-            #         f.write(poster_response.content)
+                os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                with open(file_path, "wb") as f:
+                    f.write(poster_response.content)
 
-            #     # Return relative path for Django's ImageField
-            #     return f"posters/{file_name}"
-            return poster_response.url
+                # Return relative path for Django's ImageField
+                return f"posters/{file_name}"
+            # return poster_response.url
     except Exception as e:
         print(f"Poster fetch failed for {title}: {e}")
 
