@@ -1,0 +1,46 @@
+{% extends "accounts/base.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-lg border-0 rounded-3">
+      <div class="card-body p-4 text-center">
+        <h3 class="card-title mb-4">My Profile</h3>
+        <div id="profile" class="text-start"></div>
+        <button id="logoutBtn" class="btn btn-danger w-100 mt-4">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function loadProfile() {
+  const response = await fetch("/api/profile/");
+  const data = await response.json();
+
+  const profileDiv = document.getElementById("profile");
+  profileDiv.innerHTML = `
+    <p><strong>Username:</strong> ${data.username}</p>
+    <p><strong>Email:</strong> ${data.email}</p>
+    <p><strong>Role:</strong> ${data.role || "N/A"}</p>
+    <p><strong>Bio:</strong> ${data.bio || "N/A"}</p>
+    ${data.profile_pic ? `<img src="${data.profile_pic}" alt="Profile Pic" class="img-thumbnail mt-2" width="150">` : ""}
+  `;
+}
+
+document.getElementById("logoutBtn").addEventListener("click", async function () {
+  const response = await fetch("/api/logout/", {
+    method: "POST",
+    headers: { "X-CSRFToken": csrftoken }
+  });
+  if (response.ok) {
+    window.location.href = "/login-page/";
+  }
+});
+
+loadProfile();
+</script>
+{% endblock %}

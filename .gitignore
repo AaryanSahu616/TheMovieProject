@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+staticfiles/
+local_settings.py
+
+# Ignore everything in media/
+media/*
+media/posters/*
+
+# But don't ignore this specific file
+!media/posters/
+!media/posters/no-poster.png
+
+# Environment
+.env
+.venv/
+venv/
+ENV/
+env/
+*.env
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# PyCharm
+.idea/
+
+# Migrations (optional, if you don't want to track them)
+**/migrations/*.py
+!**/migrations/__init__.py
