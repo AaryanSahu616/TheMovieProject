@@ -53,7 +53,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     localStorage.setItem("access", data.access);
     localStorage.setItem("refresh", data.refresh);
     alertBox.innerHTML = `<div class="alert alert-success">Login successful! Redirecting...</div>`;
-    setTimeout(() => window.location.href = "/profile-page/", 1500);
+    setTimeout(() => window.location.href = "/movies/", 1500);
   } else {
     alertBox.innerHTML = `<div class="alert alert-danger">${data.detail || "Invalid credentials!"}</div>`;
   }

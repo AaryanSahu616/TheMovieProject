@@ -31,16 +31,18 @@ def get_poster_url(title, year=None):
         if poster and poster != "N/A":
             # Download and save locally
             poster_response = requests.get(poster, timeout=5)
-            if poster_response.status_code == 200:
-                file_name = f"{title.replace(' ', '_')}.jpg"
-                file_path = os.path.join(settings.MEDIA_ROOT, "posters", file_name)
+            # print(poster_response.url)
+            # if poster_response.status_code == 200:
+            #     file_name = f"{title.replace(' ', '_')}.jpg"
+            #     file_path = os.path.join(settings.MEDIA_ROOT, "posters", file_name)
 
-                os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                with open(file_path, "wb") as f:
-                    f.write(poster_response.content)
+            #     os.makedirs(os.path.dirname(file_path), exist_ok=True)
+            #     with open(file_path, "wb") as f:
+            #         f.write(poster_response.content)
 
-                # Return relative path for Django's ImageField
-                return f"posters/{file_name}"
+            #     # Return relative path for Django's ImageField
+            #     return f"posters/{file_name}"
+            return poster_response.url
     except Exception as e:
         print(f"Poster fetch failed for {title}: {e}")
 
@@ -62,9 +64,10 @@ DIRECTORS_DATA = [
     {"name": "James Cameron", "birth_date": "1954-08-16"},
     {"name": "David Fincher", "birth_date": "1962-08-28"},
     {"name": "Ridley Scott", "birth_date": "1937-11-30"},
-    {"name": "Christopher Nolan", "birth_date": "1970-07-30"},
     {"name": "Baz Luhrmann", "birth_date": "1962-09-17"},
-
+    {"name": "Roman Polanski", "birth_date": "1933-08-18"}, # New
+    {"name": "Jean-Pierre Jeunet", "birth_date": "1953-09-03"}, # New
+    {"name": "Isao Takahata", "birth_date": "1935-10-29"}, # New
 ]
 
 GENRES_DATA = [
@@ -78,8 +81,8 @@ TAGS_DATA = [
     "Suspenseful", "Historical", "Philosophical", "Visually Stunning", "Dark Humor"
 ]
 
-MOVIES_DATA = MOVIES_DATA = [
-    # --- REAL CLASSICS & MODERN ICONS (1–20) ---
+MOVIES_DATA = [
+    # --- REAL CLASSICS & MODERN ICONS (1–20) - Your Original List ---
     {"title": "Inception", "release_year": 2010, "director": "Christopher Nolan", "genre": "Sci-Fi"},
     {"title": "Pulp Fiction", "release_year": 1994, "director": "Quentin Tarantino", "genre": "Crime"},
     {"title": "The Grand Budapest Hotel", "release_year": 2014, "director": "Wes Anderson", "genre": "Comedy"},
@@ -100,39 +103,39 @@ MOVIES_DATA = MOVIES_DATA = [
     {"title": "The Hateful Eight", "release_year": 2015, "director": "Quentin Tarantino", "genre": "Western"},
     {"title": "Tenet", "release_year": 2020, "director": "Christopher Nolan", "genre": "Sci-Fi"},
     {"title": "True Lies", "release_year": 1994, "director": "James Cameron", "genre": "Action"},
-
-    # --- MODERN & FICTIONAL ORIGINALS (21–50) ---
-    {"title": "Neon Horizon", "release_year": 2022, "director": "Christopher Nolan", "genre": "Sci-Fi"},
-    {"title": "The Lost Frequency", "release_year": 2021, "director": "Wes Anderson", "genre": "Mystery"},
-    {"title": "Echoes of Tomorrow", "release_year": 2020, "director": "James Cameron", "genre": "Action"},
-    {"title": "The Clockmaker’s Paradox", "release_year": 2023, "director": "Christopher Nolan", "genre": "Thriller"},
-    {"title": "Midnight Sonata", "release_year": 2019, "director": "Wes Anderson", "genre": "Drama"},
-    {"title": "Crimson Horizon", "release_year": 2024, "director": "Quentin Tarantino", "genre": "Action"},
-    {"title": "The Last Dive", "release_year": 2022, "director": "James Cameron", "genre": "Adventure"},
-    {"title": "Paper Moons", "release_year": 2018, "director": "Wes Anderson", "genre": "Romance"},
-    {"title": "Parallel Skies", "release_year": 2023, "director": "Christopher Nolan", "genre": "Sci-Fi"},
-    {"title": "The Silent Frame", "release_year": 2017, "director": "Steven Spielberg", "genre": "Drama"},
-    {"title": "Shadow Circuit", "release_year": 2025, "director": "Christopher Nolan", "genre": "Thriller"},
-    {"title": "Velvet Inferno", "release_year": 2021, "director": "Quentin Tarantino", "genre": "Crime"},
-    {"title": "Ocean of Glass", "release_year": 2020, "director": "James Cameron", "genre": "Adventure"},
-    {"title": "Whispers of Vienna", "release_year": 2018, "director": "Wes Anderson", "genre": "Drama"},
-    {"title": "Dreamline", "release_year": 2025, "director": "Christopher Nolan", "genre": "Sci-Fi"},
-    {"title": "The Abyss Reborn", "release_year": 2024, "director": "James Cameron", "genre": "Sci-Fi"},
-    {"title": "Carnival of Shadows", "release_year": 2023, "director": "Wes Anderson", "genre": "Mystery"},
-    {"title": "Rust and Chrome", "release_year": 2025, "director": "Christopher Nolan", "genre": "Action"},
-    {"title": "Silent Dominion", "release_year": 2024, "director": "Quentin Tarantino", "genre": "Crime"},
-    {"title": "Aurora Divide", "release_year": 2022, "director": "James Cameron", "genre": "Sci-Fi"},
-    {"title": "Clockwork Mirage", "release_year": 2023, "director": "Christopher Nolan", "genre": "Thriller"},
-    {"title": "The Painted Machine", "release_year": 2020, "director": "Wes Anderson", "genre": "Drama"},
-    {"title": "Blue Eclipse", "release_year": 2025, "director": "James Cameron", "genre": "Adventure"},
-    {"title": "Infernal Waltz", "release_year": 2024, "director": "Quentin Tarantino", "genre": "Thriller"},
-    {"title": "Echo Chamber", "release_year": 2021, "director": "Christopher Nolan", "genre": "Mystery"},
-    {"title": "Mirrored Souls", "release_year": 2019, "director": "Wes Anderson", "genre": "Romance"},
-    {"title": "Nova Descent", "release_year": 2023, "director": "James Cameron", "genre": "Sci-Fi"},
-    {"title": "The Crimson Tape", "release_year": 2022, "director": "Quentin Tarantino", "genre": "Crime"},
-    {"title": "Glass Atlas", "release_year": 2020, "director": "Wes Anderson", "genre": "Adventure"},
+    
+    # --- NEW REAL MOVIES (21–50) ---
+    {"title": "Oppenheimer", "release_year": 2023, "director": "Christopher Nolan", "genre": "Drama"},
+    {"title": "Dunkirk", "release_year": 2017, "director": "Christopher Nolan", "genre": "War"},
+    {"title": "Reservoir Dogs", "release_year": 1992, "director": "Quentin Tarantino", "genre": "Crime"},
+    {"title": "Once Upon a Time in Hollywood", "release_year": 2019, "director": "Quentin Tarantino", "genre": "Drama"},
+    {"title": "Moonrise Kingdom", "release_year": 2012, "director": "Wes Anderson", "genre": "Adventure"},
+    {"title": "Isle of Dogs", "release_year": 2018, "director": "Wes Anderson", "genre": "Animation"},
+    {"title": "Raiders of the Lost Ark", "release_year": 1981, "director": "Steven Spielberg", "genre": "Adventure"},
+    {"title": "Jaws", "release_year": 1975, "director": "Steven Spielberg", "genre": "Thriller"},
+    {"title": "Terminator 2: Judgment Day", "release_year": 1991, "director": "James Cameron", "genre": "Sci-Fi"},
+    {"title": "The Terminator", "release_year": 1984, "director": "James Cameron", "genre": "Sci-Fi"},
+    {"title": "Vertigo", "release_year": 1958, "director": "Alfred Hitchcock", "genre": "Mystery"},
+    {"title": "North by Northwest", "release_year": 1959, "director": "Alfred Hitchcock", "genre": "Thriller"},
+    {"title": "Arrival", "release_year": 2016, "director": "Denis Villeneuve", "genre": "Sci-Fi"},
+    {"title": "Prisoners", "release_year": 2013, "director": "Denis Villeneuve", "genre": "Thriller"},
+    {"title": "Spirited Away", "release_year": 2001, "director": "Hayao Miyazaki", "genre": "Animation"},
+    {"title": "Princess Mononoke", "release_year": 1997, "director": "Hayao Miyazaki", "genre": "Fantasy"},
+    {"title": "The Power of the Dog", "release_year": 2021, "director": "Jane Campion", "genre": "Drama"},
+    {"title": "Pianist, The", "release_year": 2002, "director": "Roman Polanski", "genre": "Drama"}, # Note: Added director data for Polanski, check full script below
+    {"title": "Parasite", "release_year": 2019, "director": "Bong Joon-ho", "genre": "Thriller"},
+    {"title": "Memories of Murder", "release_year": 2003, "director": "Bong Joon-ho", "genre": "Mystery"},
+    {"title": "Lost in Translation", "release_year": 2003, "director": "Sofia Coppola", "genre": "Romance"},
+    {"title": "The Virgin Suicides", "release_year": 1999, "director": "Sofia Coppola", "genre": "Drama"},
+    {"title": "Se7en", "release_year": 1995, "director": "David Fincher", "genre": "Mystery"},
+    {"title": "Fight Club", "release_year": 1999, "director": "David Fincher", "genre": "Drama"},
+    {"title": "Gladiator", "release_year": 2000, "director": "Ridley Scott", "genre": "Action"},
+    {"title": "Blade Runner", "release_year": 1982, "director": "Ridley Scott", "genre": "Sci-Fi"},
+    {"title": "The Great Gatsby", "release_year": 2013, "director": "Baz Luhrmann", "genre": "Romance"},
+    {"title": "Moulin Rouge!", "release_year": 2001, "director": "Baz Luhrmann", "genre": "Romance"},
+    {"title": "Amélie", "release_year": 2001, "director": "Jean-Pierre Jeunet", "genre": "Comedy"}, # Note: Added director data for Jeunet, check full script below
+    {"title": "Grave of the Fireflies", "release_year": 1988, "director": "Isao Takahata", "genre": "Animation"}, # Note: Added director data for Takahata, check full script below
 ]
-
 # --- Main Run Function ---
 def run():
     print("🎬 --- Starting bulk data population (50 Movies) ---")
