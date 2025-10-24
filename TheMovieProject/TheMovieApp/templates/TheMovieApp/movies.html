@@ -137,7 +137,7 @@
         <h1 class="text-center mb-4 text-warning">🎬 Explore New Releases</h1>
         {% if movies|length > 0 %}
             {% with featured_movie=movies.0 %}
-                <div class="p-5 rounded-3 shadow" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{% if featured_movie.poster %}{{ featured_movie.poster.url }}{% else %}{% static 'default_poster.jpg' %}{% endif %}'); background-size: cover; background-position: center;">
+                <div class="p-5 rounded-3 shadow" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{% if featured_movie.poster %}{{ featured_movie.poster }}{% else %}{% static 'default_poster.jpg' %}{% endif %}'); background-size: cover; background-position: center;">
                     <h2 class="display-4 fw-bold text-white">{{ featured_movie.title }}</h2>
                     <p class="col-md-8 fs-5 text-light text-truncate-2">{{ featured_movie.synopsis|default:"No synopsis available." }}</p>
                     <button class="btn btn-danger btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#movieModal{{ featured_movie.id }}">View Details & Review</button>
@@ -166,7 +166,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 {% if movie.poster %}
-                                    <img src="{{ movie.poster.url }}" class="img-fluid rounded mb-3" alt="{{ movie.title }}">
+                                    <img src="{{ movie.poster }}" class="img-fluid rounded mb-3" alt="{{ movie.title }}">
                                 {% else %}
                                     <img src="{% static 'default_poster.jpg' %}" class="img-fluid rounded mb-3" alt="No poster">
                                 {% endif %}

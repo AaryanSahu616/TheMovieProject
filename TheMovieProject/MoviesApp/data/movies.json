@@ -1,0 +1,701 @@
+{
+    "directors": [
+        {
+            "name": "Christopher Nolan",
+            "birth_date": "1970-07-30"
+        },
+        {
+            "name": "Greta Gerwig",
+            "birth_date": "1983-08-04"
+        },
+        {
+            "name": "Quentin Tarantino",
+            "birth_date": "1963-03-27"
+        },
+        {
+            "name": "Denis Villeneuve",
+            "birth_date": "1967-10-03"
+        },
+        {
+            "name": "Hayao Miyazaki",
+            "birth_date": "1941-01-05"
+        },
+        {
+            "name": "Jane Campion",
+            "birth_date": "1954-04-30"
+        },
+        {
+            "name": "Bong Joon-ho",
+            "birth_date": "1969-09-14"
+        },
+        {
+            "name": "Steven Spielberg",
+            "birth_date": "1946-12-18"
+        },
+        {
+            "name": "Sofia Coppola",
+            "birth_date": "1971-05-14"
+        },
+        {
+            "name": "Alfred Hitchcock",
+            "birth_date": "1899-08-13"
+        },
+        {
+            "name": "Wes Anderson",
+            "birth_date": "1969-05-01"
+        },
+        {
+            "name": "James Cameron",
+            "birth_date": "1954-08-16"
+        },
+        {
+            "name": "David Fincher",
+            "birth_date": "1962-08-28"
+        },
+        {
+            "name": "Ridley Scott",
+            "birth_date": "1937-11-30"
+        },
+        {
+            "name": "Baz Luhrmann",
+            "birth_date": "1962-09-17"
+        },
+        {
+            "name": "Roman Polanski",
+            "birth_date": "1933-08-18"
+        },
+        {
+            "name": "Jean-Pierre Jeunet",
+            "birth_date": "1953-09-03"
+        },
+        {
+            "name": "Isao Takahata",
+            "birth_date": "1935-10-29"
+        }
+    ],
+    "genres": [
+        "Sci-Fi",
+        "Drama",
+        "Action",
+        "Adventure",
+        "Comedy",
+        "Thriller",
+        "Fantasy",
+        "Romance",
+        "Horror",
+        "Documentary",
+        "Mystery",
+        "Animation"
+    ],
+    "tags": [
+        "Mind-Bending",
+        "Time Travel",
+        "Strong Female Lead",
+        "Award Winner",
+        "Must Watch",
+        "Cyberpunk",
+        "Dystopian",
+        "Epic Scope",
+        "Family Friendly",
+        "Cult Classic",
+        "Suspenseful",
+        "Historical",
+        "Philosophical",
+        "Visually Stunning",
+        "Dark Humor"
+    ],
+    "movies": [
+        {
+            "title": "Inception",
+            "release_year": 2010,
+            "director": "Christopher Nolan",
+            "genre": "Sci-Fi",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+            "release_date": "2010-11-01",
+            "tags": [
+                "Time Travel",
+                "Mind-Bending"
+            ]
+        },
+        {
+            "title": "Pulp Fiction",
+            "release_year": 1994,
+            "director": "Quentin Tarantino",
+            "genre": "Crime",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1994-03-08",
+            "tags": [
+                "Epic Scope",
+                "Time Travel",
+                "Historical"
+            ]
+        },
+        {
+            "title": "The Grand Budapest Hotel",
+            "release_year": 2014,
+            "director": "Wes Anderson",
+            "genre": "Comedy",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMzM5NjUxOTEyMl5BMl5BanBnXkFtZTgwNjEyMDM0MDE@._V1_SX300.jpg",
+            "release_date": "2014-10-14",
+            "tags": [
+                "Epic Scope",
+                "Dark Humor",
+                "Philosophical"
+            ]
+        },
+        {
+            "title": "Jurassic Park",
+            "release_year": 1993,
+            "director": "Steven Spielberg",
+            "genre": "Adventure",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMjM2MDgxMDg0Nl5BMl5BanBnXkFtZTgwNTM2OTM5NDE@._V1_SX300.jpg",
+            "release_date": "1993-10-15",
+            "tags": [
+                "Suspenseful",
+                "Family Friendly"
+            ]
+        },
+        {
+            "title": "Titanic",
+            "release_year": 1997,
+            "director": "James Cameron",
+            "genre": "Romance",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYzYyN2FiZmUtYWYzMy00MzViLWJkZTMtOGY1ZjgzNWMwN2YxXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1997-06-26",
+            "tags": [
+                "Time Travel",
+                "Philosophical",
+                "Must Watch"
+            ]
+        },
+        {
+            "title": "Interstellar",
+            "release_year": 2014,
+            "director": "Christopher Nolan",
+            "genre": "Sci-Fi",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2014-02-03",
+            "tags": [
+                "Dystopian",
+                "Historical"
+            ]
+        },
+        {
+            "title": "Schindler's List",
+            "release_year": 1993,
+            "director": "Steven Spielberg",
+            "genre": "Drama",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNjM1ZDQxYWUtMzQyZS00MTE1LWJmZGYtNGUyNTdlYjM3ZmVmXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1993-04-17",
+            "tags": [
+                "Family Friendly",
+                "Visually Stunning"
+            ]
+        },
+        {
+            "title": "Django Unchained",
+            "release_year": 2012,
+            "director": "Quentin Tarantino",
+            "genre": "Western",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMjIyNTQ5NjQ1OV5BMl5BanBnXkFtZTcwODg1MDU4OA@@._V1_SX300.jpg",
+            "release_date": "2012-11-26",
+            "tags": [
+                "Cult Classic"
+            ]
+        },
+        {
+            "title": "Avatar",
+            "release_year": 2009,
+            "director": "James Cameron",
+            "genre": "Adventure",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMDEzMmQwZjctZWU2My00MWNlLWE0NjItMDJlYTRlNGJiZjcyXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2009-11-12",
+            "tags": [
+                "Cult Classic"
+            ]
+        },
+        {
+            "title": "Psycho",
+            "release_year": 1960,
+            "director": "Alfred Hitchcock",
+            "genre": "Thriller",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYjZhMzFiZjItODA3ZC00MmRhLWIzMGYtMmVjOWUwYTA3MTRjXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1960-07-06",
+            "tags": [
+                "Cult Classic"
+            ]
+        },
+        {
+            "title": "The Dark Knight",
+            "release_year": 2008,
+            "director": "Christopher Nolan",
+            "genre": "Action",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+            "release_date": "2008-12-12",
+            "tags": [
+                "Dark Humor",
+                "Suspenseful"
+            ]
+        },
+        {
+            "title": "Kill Bill: Vol. 1",
+            "release_year": 2003,
+            "director": "Quentin Tarantino",
+            "genre": "Action",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZmMyYzJlZmYtY2I3NC00NjAyLTkyZWItZjdjZDI1YTYyYTEwXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2003-05-20",
+            "tags": [
+                "Suspenseful"
+            ]
+        },
+        {
+            "title": "The Royal Tenenbaums",
+            "release_year": 2001,
+            "director": "Wes Anderson",
+            "genre": "Drama",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZTc1MzFlMjEtMzkyNC00NDgyLThjMjMtMzQzZGI5YjUyNzU5XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2001-01-25",
+            "tags": [
+                "Dark Humor",
+                "Philosophical",
+                "Award Winner"
+            ]
+        },
+        {
+            "title": "Saving Private Ryan",
+            "release_year": 1998,
+            "director": "Steven Spielberg",
+            "genre": "War",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZGZhZGQ1ZWUtZTZjYS00MDJhLWFkYjctN2ZlYjE5NWYwZDM2XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1998-01-04",
+            "tags": [
+                "Must Watch",
+                "Cult Classic",
+                "Epic Scope"
+            ]
+        },
+        {
+            "title": "Aliens",
+            "release_year": 1986,
+            "director": "James Cameron",
+            "genre": "Sci-Fi",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZjIyNGJhYzYtN2I1My00OTVhLWEyMzItZTVjNDMzOTVkYWViXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1986-03-07",
+            "tags": [
+                "Philosophical",
+                "Cyberpunk"
+            ]
+        },
+        {
+            "title": "Rear Window",
+            "release_year": 1954,
+            "director": "Alfred Hitchcock",
+            "genre": "Mystery",
+            "poster": "https://m.media-amazon.com/images/M/MV5BODZhOWI1ODgtMzdiOS00YjNkLTgwOGUtYmIyZDg5ZmQwMzQ1XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1954-07-05",
+            "tags": [
+                "Epic Scope"
+            ]
+        },
+        {
+            "title": "E.T. the Extra-Terrestrial",
+            "release_year": 1982,
+            "director": "Steven Spielberg",
+            "genre": "Family",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYTNhNmY0YWMtMTczYi00MTA0LThhMmUtMTIxYzE0Y2QwMzRlXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1982-03-25",
+            "tags": [
+                "Philosophical"
+            ]
+        },
+        {
+            "title": "The Hateful Eight",
+            "release_year": 2015,
+            "director": "Quentin Tarantino",
+            "genre": "Western",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMjA1MTc1NTg5NV5BMl5BanBnXkFtZTgwOTM2MDEzNzE@._V1_SX300.jpg",
+            "release_date": "2015-08-21",
+            "tags": [
+                "Philosophical",
+                "Historical"
+            ]
+        },
+        {
+            "title": "Tenet",
+            "release_year": 2020,
+            "director": "Christopher Nolan",
+            "genre": "Sci-Fi",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTU0ZjZlYTUtYzIwMC00ZmQzLWEwZTAtZWFhMWIwYjMxY2I3XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2020-03-14",
+            "tags": [
+                "Family Friendly",
+                "Suspenseful",
+                "Must Watch"
+            ]
+        },
+        {
+            "title": "True Lies",
+            "release_year": 1994,
+            "director": "James Cameron",
+            "genre": "Action",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYjU1ZjNhMjMtOTMxZS00MDc1LTlkNzQtZTdjNGQyYjQ4YTA4XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1994-05-27",
+            "tags": [
+                "Visually Stunning",
+                "Dark Humor",
+                "Historical"
+            ]
+        },
+        {
+            "title": "Oppenheimer",
+            "release_year": 2023,
+            "director": "Christopher Nolan",
+            "genre": "Drama",
+            "poster": "https://m.media-amazon.com/images/M/MV5BN2JkMDc5MGQtZjg3YS00NmFiLWIyZmQtZTJmNTM5MjVmYTQ4XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2023-08-05",
+            "tags": [
+                "Visually Stunning"
+            ]
+        },
+        {
+            "title": "Dunkirk",
+            "release_year": 2017,
+            "director": "Christopher Nolan",
+            "genre": "War",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZWU5ZjJkNTQtMzQwOS00ZGE4LWJkMWUtMGQ5YjdiM2FhYmRhXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2017-04-16",
+            "tags": [
+                "Suspenseful",
+                "Time Travel"
+            ]
+        },
+        {
+            "title": "Reservoir Dogs",
+            "release_year": 1992,
+            "director": "Quentin Tarantino",
+            "genre": "Crime",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMmMzYjg4NDctYWY0Mi00OGViLWIzMTMtYWNlZGY5ZDJmYjk3XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1992-06-26",
+            "tags": [
+                "Visually Stunning",
+                "Time Travel",
+                "Dark Humor"
+            ]
+        },
+        {
+            "title": "Once Upon a Time in Hollywood",
+            "release_year": 2019,
+            "director": "Quentin Tarantino",
+            "genre": "Drama",
+            "poster": "https://m.media-amazon.com/images/M/MV5BOGNmMjJiZTAtMTM0ZS00OTNiLWE1M2ItYjk0YzBjNTkzMTYzXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2019-12-10",
+            "tags": [
+                "Mind-Bending",
+                "Dark Humor"
+            ]
+        },
+        {
+            "title": "Moonrise Kingdom",
+            "release_year": 2012,
+            "director": "Wes Anderson",
+            "genre": "Adventure",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTEwMTc3NDkzOTJeQTJeQWpwZ15BbWU3MDI4NTAwNzc@._V1_SX300.jpg",
+            "release_date": "2012-04-09",
+            "tags": [
+                "Epic Scope"
+            ]
+        },
+        {
+            "title": "Isle of Dogs",
+            "release_year": 2018,
+            "director": "Wes Anderson",
+            "genre": "Animation",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZTVmZWFmYWYtZTY1NC00Yjg5LTkxZGItZjhiYTExNTExNjA3XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2018-02-14",
+            "tags": [
+                "Family Friendly",
+                "Epic Scope",
+                "Philosophical"
+            ]
+        },
+        {
+            "title": "Raiders of the Lost Ark",
+            "release_year": 1981,
+            "director": "Steven Spielberg",
+            "genre": "Adventure",
+            "poster": "https://m.media-amazon.com/images/M/MV5BOGNhMjg2ZjgtYzk4Ni00MTViLTg1MmUtYzM2MDZiYjZlMmU3XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1981-07-26",
+            "tags": [
+                "Historical"
+            ]
+        },
+        {
+            "title": "Jaws",
+            "release_year": 1975,
+            "director": "Steven Spielberg",
+            "genre": "Thriller",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYjViNDQzNmUtYzkxZi00NTk5LTljMmItYjJlZmZkODIxNjU1XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1975-04-06",
+            "tags": [
+                "Time Travel",
+                "Dystopian"
+            ]
+        },
+        {
+            "title": "Terminator 2: Judgment Day",
+            "release_year": 1991,
+            "director": "James Cameron",
+            "genre": "Sci-Fi",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNGMyMGNkMDUtMjc2Ni00NWFlLTgyODEtZTY2MzBiZTg0OWZiXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1991-12-15",
+            "tags": [
+                "Cult Classic",
+                "Mind-Bending",
+                "Epic Scope"
+            ]
+        },
+        {
+            "title": "The Terminator",
+            "release_year": 1984,
+            "director": "James Cameron",
+            "genre": "Sci-Fi",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZmE0YzIxM2QtMGNlMi00MjRmLWE3MWMtOWQzMGVjMmU0YTFmXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1984-09-25",
+            "tags": [
+                "Cyberpunk",
+                "Must Watch"
+            ]
+        },
+        {
+            "title": "Vertigo",
+            "release_year": 1958,
+            "director": "Alfred Hitchcock",
+            "genre": "Mystery",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNzEyZTUxMWItMGVhYy00Y2NlLTljYTMtYzBmMzI1YmUyMDBkXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1958-03-26",
+            "tags": [
+                "Dark Humor"
+            ]
+        },
+        {
+            "title": "North by Northwest",
+            "release_year": 1959,
+            "director": "Alfred Hitchcock",
+            "genre": "Thriller",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZWIzODI2OGItMzM0Ny00OGRmLTlkNmItMDQxMTFmMTk3YmQwXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1959-07-15",
+            "tags": [
+                "Dark Humor"
+            ]
+        },
+        {
+            "title": "Arrival",
+            "release_year": 2016,
+            "director": "Denis Villeneuve",
+            "genre": "Sci-Fi",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTExMzU0ODcxNDheQTJeQWpwZ15BbWU4MDE1OTI4MzAy._V1_SX300.jpg",
+            "release_date": "2016-09-26",
+            "tags": [
+                "Award Winner"
+            ]
+        },
+        {
+            "title": "Prisoners",
+            "release_year": 2013,
+            "director": "Denis Villeneuve",
+            "genre": "Thriller",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTg0NTIzMjQ1NV5BMl5BanBnXkFtZTcwNDc3MzM5OQ@@._V1_SX300.jpg",
+            "release_date": "2013-11-06",
+            "tags": [
+                "Cyberpunk"
+            ]
+        },
+        {
+            "title": "Spirited Away",
+            "release_year": 2001,
+            "director": "Hayao Miyazaki",
+            "genre": "Animation",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2001-12-26",
+            "tags": [
+                "Dystopian",
+                "Family Friendly",
+                "Visually Stunning"
+            ]
+        },
+        {
+            "title": "Princess Mononoke",
+            "release_year": 1997,
+            "director": "Hayao Miyazaki",
+            "genre": "Fantasy",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNjAzODViNGEtMjBkYi00N2U5LWJjNjAtY2U0MGJhZTEwOTU0XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1997-09-15",
+            "tags": [
+                "Time Travel",
+                "Strong Female Lead"
+            ]
+        },
+        {
+            "title": "The Power of the Dog",
+            "release_year": 2021,
+            "director": "Jane Campion",
+            "genre": "Drama",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNzgyMzA2NDEtZWUxNy00MDNmLTllMDYtNzZmNTU5ZWVmMzhlXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2021-04-06",
+            "tags": [
+                "Mind-Bending",
+                "Dystopian"
+            ]
+        },
+        {
+            "title": "Pianist, The",
+            "release_year": 2002,
+            "director": "Roman Polanski",
+            "genre": "Drama",
+            "poster": null,
+            "release_date": "2002-01-17",
+            "tags": [
+                "Cult Classic"
+            ]
+        },
+        {
+            "title": "Parasite",
+            "release_year": 2019,
+            "director": "Bong Joon-ho",
+            "genre": "Thriller",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYjk1Y2U4MjQtY2ZiNS00OWQyLWI3MmYtZWUwNmRjYWRiNWNhXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2019-08-14",
+            "tags": [
+                "Historical"
+            ]
+        },
+        {
+            "title": "Memories of Murder",
+            "release_year": 2003,
+            "director": "Bong Joon-ho",
+            "genre": "Mystery",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYmRjOWE5NmMtYTdkYS00ODFlLWJiMTMtYzE2NDZlZjlkZDQ0XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2003-07-05",
+            "tags": [
+                "Philosophical",
+                "Suspenseful",
+                "Cyberpunk"
+            ]
+        },
+        {
+            "title": "Lost in Translation",
+            "release_year": 2003,
+            "director": "Sofia Coppola",
+            "genre": "Romance",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTUxMzk0NDg1MV5BMl5BanBnXkFtZTgwNDg0NjkxMDI@._V1_SX300.jpg",
+            "release_date": "2003-09-15",
+            "tags": [
+                "Dystopian"
+            ]
+        },
+        {
+            "title": "The Virgin Suicides",
+            "release_year": 1999,
+            "director": "Sofia Coppola",
+            "genre": "Drama",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMmNhYTE5MjQtMzI2Ny00MDRhLWE4ZjAtYTg0YjNhNjZmMTVlXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1999-02-04",
+            "tags": [
+                "Strong Female Lead",
+                "Time Travel"
+            ]
+        },
+        {
+            "title": "Se7en",
+            "release_year": 1995,
+            "director": "David Fincher",
+            "genre": "Mystery",
+            "poster": "https://m.media-amazon.com/images/M/MV5BY2IzNzMxZjctZjUxZi00YzAxLTk3ZjMtODFjODdhMDU5NDM1XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1995-01-12",
+            "tags": [
+                "Award Winner"
+            ]
+        },
+        {
+            "title": "Fight Club",
+            "release_year": 1999,
+            "director": "David Fincher",
+            "genre": "Drama",
+            "poster": "https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1999-05-13",
+            "tags": [
+                "Cult Classic",
+                "Must Watch"
+            ]
+        },
+        {
+            "title": "Gladiator",
+            "release_year": 2000,
+            "director": "Ridley Scott",
+            "genre": "Action",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYWQ4YmNjYjEtOWE1Zi00Y2U4LWI4NTAtMTU0MjkxNWQ1ZmJiXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2000-11-19",
+            "tags": [
+                "Award Winner"
+            ]
+        },
+        {
+            "title": "Blade Runner",
+            "release_year": 1982,
+            "director": "Ridley Scott",
+            "genre": "Sci-Fi",
+            "poster": "https://m.media-amazon.com/images/M/MV5BOWQ4YTBmNTQtMDYxMC00NGFjLTkwOGQtNzdhNmY1Nzc1MzUxXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1982-09-22",
+            "tags": [
+                "Dystopian"
+            ]
+        },
+        {
+            "title": "The Great Gatsby",
+            "release_year": 2013,
+            "director": "Baz Luhrmann",
+            "genre": "Romance",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTkxNTk1ODcxNl5BMl5BanBnXkFtZTcwMDI1OTMzOQ@@._V1_SX300.jpg",
+            "release_date": "2013-01-22",
+            "tags": [
+                "Cult Classic",
+                "Visually Stunning"
+            ]
+        },
+        {
+            "title": "Moulin Rouge!",
+            "release_year": 2001,
+            "director": "Baz Luhrmann",
+            "genre": "Romance",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYTgyOGY4OTktZmZhMC00ZmIwLWI4YjUtNjYzNDg1Nzc3ZDg1XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2001-06-23",
+            "tags": [
+                "Historical"
+            ]
+        },
+        {
+            "title": "Am\u00e9lie",
+            "release_year": 2001,
+            "director": "Jean-Pierre Jeunet",
+            "genre": "Comedy",
+            "poster": "https://m.media-amazon.com/images/M/MV5BOTNmYzY0MWQtZGZmNy00Y2Y4LWFmMDQtMTZjYTdiYzEwZGQ2XkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "2001-07-13",
+            "tags": [
+                "Dystopian"
+            ]
+        },
+        {
+            "title": "Grave of the Fireflies",
+            "release_year": 1988,
+            "director": "Isao Takahata",
+            "genre": "Animation",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNTY5MmE2OGMtN2IxNC00MDY4LTkwMGEtZDUzOTYyNWE0ZTNjXkEyXkFqcGc@._V1_SX300.jpg",
+            "release_date": "1988-04-05",
+            "tags": [
+                "Cyberpunk",
+                "Historical",
+                "Mind-Bending"
+            ]
+        }
+    ]
+}

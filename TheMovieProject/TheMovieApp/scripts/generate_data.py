@@ -1,53 +1,41 @@
-# MoviesApp/scripts/initial_data.py
-
-from django.db import IntegrityError
-# NOTE: Update 'YourAppName' to your actual app name (e.g., 'movies')
-from TheMovieApp.models import Director, Genre, Tags, Movie, UserReview 
-from AccountsApp.models import User
-import datetime
-import random
-import requests
 import os
-from itertools import cycle
-from django.core.files import File
-from django.core.files.temp import NamedTemporaryFile
+import json
+import random
+import datetime
+import requests
 from django.conf import settings
 
-# --- Configuration Data for 50 Movies ---
-OMDB_API_KEY = "8b9eee2e"  # <-- replace with your OMDb API key
+# OMDb Config
+OMDB_API_KEY = "8b9eee2e"
 OMDB_BASE_URL = "https://www.omdbapi.com/"
-# OMDB_BASE_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=8b9eee2e"
 
+# Output JSON storage
+OUTPUT_PATH = os.path.join(settings.BASE_DIR, "MoviesApp", "data", "movies.json")
+
+
+# ------------------------------
+# Fetch poster via OMDb
+# ------------------------------
 def get_poster_url(title, year=None):
-    """Fetch movie poster from OMDb API and optionally download it locally."""
     try:
         params = {"t": title, "apikey": OMDB_API_KEY}
         if year:
             params["y"] = year
-        response = requests.get(OMDB_BASE_URL, params=params, timeout=5)
-        data = response.json()
+
+        resp = requests.get(OMDB_BASE_URL, params=params, timeout=5)
+        data = resp.json()
+
         poster = data.get("Poster")
-
         if poster and poster != "N/A":
-            # Download and save locally
-            poster_response = requests.get(poster, timeout=5)
-            if poster_response.status_code == 200:
-                file_name = f"{title.replace(' ', '_')}.jpg"
-                file_path = os.path.join(settings.MEDIA_ROOT, "posters", file_name)
-
-                os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                with open(file_path, "wb") as f:
-                    f.write(poster_response.content)
-
-                # Return relative path for Django's ImageField
-                return f"posters/{file_name}"
-            # return poster_response.url
-    except Exception as e:
-        print(f"Poster fetch failed for {title}: {e}")
-
-    return "posters/no-poster.png"  # default fallback in your media folder
+            return poster
+    except:
+        pass
+    return None
 
 
+# ------------------------------
+# STATIC DATA
+# ------------------------------
 DIRECTORS_DATA = [
     {"name": "Christopher Nolan", "birth_date": "1970-07-30"},
     {"name": "Greta Gerwig", "birth_date": "1983-08-04"},
@@ -135,131 +123,42 @@ MOVIES_DATA = [
     {"title": "Amélie", "release_year": 2001, "director": "Jean-Pierre Jeunet", "genre": "Comedy"}, # Note: Added director data for Jeunet, check full script below
     {"title": "Grave of the Fireflies", "release_year": 1988, "director": "Isao Takahata", "genre": "Animation"}, # Note: Added director data for Takahata, check full script below
 ]
-# --- Main Run Function ---
+
+
+# (You will paste your existing static lists here unchanged)
+
+
+# ------------------------------
+# MAIN
+# ------------------------------
 def run():
-    print("🎬 --- Starting bulk data population (50 Movies) ---")
+    print("📦 Generating JSON metadata...")
 
-    # --- 1. Cleanup ---
-    UserReview.objects.all().delete()
-    Movie.objects.all().delete()
-    Director.objects.all().delete()
-    Genre.objects.all().delete()
-    Tags.objects.all().delete()
-    print("🧹 Cleanup complete.")
+    result = {
+        "directors": DIRECTORS_DATA,
+        "genres": GENRES_DATA,
+        "tags": TAGS_DATA,
+        "movies": []
+    }
 
-    # --- 2. Create Lookup Tables (Director, Genre, Tags) ---
-    directors_map = {}
-    genres_map = {}
-    tags_map = {}
+    for m in MOVIES_DATA:
+        poster = get_poster_url(m["title"], m["release_year"])
 
-    # Directors
-    for d_data in DIRECTORS_DATA:
-        director, _ = Director.objects.get_or_create(
-            name=d_data["name"],
-            defaults={"birth_date": datetime.date.fromisoformat(d_data["birth_date"])}
-        )
-        directors_map[d_data["name"]] = director
+        movie_entry = {
+            "title": m["title"],
+            "release_year": m["release_year"],
+            "director": m["director"],
+            "genre": m["genre"],
+            "poster": poster,
+            "release_date": str(datetime.date(m["release_year"], random.randint(1,12), random.randint(1,28))),
+            "tags": random.sample(TAGS_DATA, random.randint(1, 3))
+        }
 
-    # Genres
-    for g_name in GENRES_DATA:
-        genre, _ = Genre.objects.get_or_create(name=g_name)
-        genres_map[g_name] = genre
+        result["movies"].append(movie_entry)
 
-    # Tags
-    for t_name in TAGS_DATA:
-        tag, _ = Tags.objects.get_or_create(name=t_name)
-        tags_map[t_name] = tag
+    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
-    print(f"📚 Created {Director.objects.count()} Directors, {Genre.objects.count()} Genres, {Tags.objects.count()} Tags.")
+    with open(OUTPUT_PATH, "w") as f:
+        json.dump(result, f, indent=4)
 
-    # --- 3. Create Movie Data (Bulk Creation) ---
-    movies_to_create = []
-    m2m_data = []
-
-    for m_data in MOVIES_DATA:
-        director_obj = directors_map.get(m_data["director"])
-        if not director_obj:
-            print(f"⚠️ Skipping {m_data['title']} — director not found.")
-            continue
-
-        # Fetch poster URL from OMDb
-        poster_url = get_poster_url(m_data["title"], m_data["release_year"])
-
-        # Generate a pseudo-random date in that year
-        release_date = datetime.date(m_data["release_year"], random.randint(1, 12), random.randint(1, 28))
-
-        # Create movie object
-        movie = Movie(
-            title=m_data["title"],
-            synopsis=f"A thought-provoking {', '.join(m_data.get('genres', []))} film directed by {m_data['director']}.",
-            poster=poster_url,
-            release_date=release_date,
-            director=director_obj,
-        )
-        movies_to_create.append(movie)
-
-        # M2M data (assign 1–2 genres + 1–3 random tags)
-        m2m_data.append({
-            "title": m_data["title"],
-            "genres": m_data.get("genres", []),
-            "tags": random.sample(list(tags_map.keys()), random.randint(1, 3)),
-        })
-
-    Movie.objects.bulk_create(movies_to_create)
-    print(f"🎞️ Created {Movie.objects.count()} Movies.")
-
-    # --- 4. Add Many-to-Many Relationships ---
-    movie_lookup = {movie.title: movie for movie in Movie.objects.all()}
-
-    for item in m2m_data:
-        movie = movie_lookup.get(item["title"])
-        if not movie:
-            continue
-
-        # Link genres
-        genre_objs = [genres_map[g] for g in item["genres"] if g in genres_map]
-        movie.genre.add(*genre_objs)
-
-        # Link tags
-        tag_objs = [tags_map[t] for t in item["tags"] if t in tags_map]
-        movie.tags.add(*tag_objs)
-
-    print("🔗 Many-to-Many relationships established.")
-
-    # --- 5. Create Users ---
-    try:
-        user1, _ = User.objects.get_or_create(username="test_user1", defaults={"email": "user1@example.com"})
-        user2, _ = User.objects.get_or_create(username="movie_fan", defaults={"email": "fan@example.com"})
-    except IntegrityError:
-        print("⚠️ WARNING: Could not create test users. Ensure they exist.")
-        user1 = User.objects.filter(username="test_user1").first()
-        user2 = User.objects.filter(username="movie_fan").first()
-
-    # --- 6. Create User Reviews ---
-    review_movies = Movie.objects.all()[:5]
-    if user1 and user2 and review_movies.exists():
-        reviews_to_create = []
-        for movie in review_movies:
-            reviews_to_create.append(
-                UserReview(
-                    movie=movie,
-                    user=user1,
-                    review_text=f"A fantastic movie! Loved the direction by {movie.director.name}.",
-                    rating=random.randint(4, 5)
-                )
-            )
-            reviews_to_create.append(
-                UserReview(
-                    movie=movie,
-                    user=user2,
-                    review_text="Enjoyable and well-executed. Worth watching!",
-                    rating=random.randint(3, 4)
-                )
-            )
-        UserReview.objects.bulk_create(reviews_to_create)
-        print(f"⭐ Created {UserReview.objects.count()} User Reviews.")
-    else:
-        print("⚠️ Skipping UserReview creation (missing users or movies).")
-
-    print(f"✅ --- Data population complete. Total Movies: {Movie.objects.count()} ---")
-
+    print(f"✅ JSON saved to: {OUTPUT_PATH}")
