@@ -92,11 +92,11 @@ class AddOrUpdateReviewAPIView(generics.GenericAPIView):
 
         # Basic Validation
         try:
-            rating = int(rating)
-            if not 1 <= rating <= 5:
+            rating = float(rating)
+            if not 0 <= rating <= 5:
                  return Response({"error": "Rating must be between 1 and 5."}, status=status.HTTP_400_BAD_REQUEST)
         except (ValueError, TypeError):
-             return Response({"error": "Rating is required and must be an integer."}, status=status.HTTP_400_BAD_REQUEST)
+             return Response({"error": "Rating is required and must be an decimal."}, status=status.HTTP_400_BAD_REQUEST)
 
         # Ensure review_text is present, even if empty string
         if review_text is None:

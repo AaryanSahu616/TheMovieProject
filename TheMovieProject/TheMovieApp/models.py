@@ -30,7 +30,7 @@ class UserReview(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     review_text = models.TextField()
-    rating = models.IntegerField()
+    rating = models.DecimalField(decimal_places=1, max_digits=2)  # e.g., 4.5
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

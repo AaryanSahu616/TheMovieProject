@@ -1,15 +1,18 @@
 {% extends "TheMovieApp/base.html" %}
+
 {% load static %}
-{% load custom_tags %} 
+{% load custom_tags %}
 {% load crispy_forms_tags %}
 
 {% block title %}Explore Movies | MovieDB{% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
     /* Global Card Styles */
     .movie-card {
-        background-color: #1e1e1e; /* Darker than body for contrast */
+        background-color: #1e1e1e;
         border: none;
         border-radius: 6px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.5);
@@ -19,8 +22,9 @@
     }
     .movie-card:hover { transform: scale(1.05); z-index: 10; }
     .movie-poster { width: 100%; height: 300px; object-fit: cover; border-radius: 6px; }
-    .star { color: #f5c518; font-size: 1.2rem; }
-    .text-truncate-2 { 
+    .star { font-size: 1.6rem; line-height: 1; }
+
+    .text-truncate-2 {
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -29,101 +33,106 @@
 
     /* Shelf/Carousel Styles */
     .shelf-container { padding: 20px 0; }
-    .shelf-row { 
+    .shelf-row {
         display: flex;
         flex-wrap: nowrap;
-        overflow-x: auto; /* Enable horizontal scrolling */
+        overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         gap: 15px;
         padding-bottom: 15px;
     }
-    .shelf-item { 
-        flex: 0 0 200px; /* Set fixed width for each movie item */
+    .shelf-item {
+        flex: 0 0 200px;
         max-width: 200px;
         position: relative;
     }
     .shelf-title { color: #fff; margin-bottom: 15px; border-left: 5px solid #e50914; padding-left: 15px; }
-    
-    /* Scrollbar Styling (Optional: for aesthetics) */
+
+    /* Scrollbar Styling */
     .shelf-row::-webkit-scrollbar { height: 8px; }
     .shelf-row::-webkit-scrollbar-thumb { background-color: #888; border-radius: 10px; }
     .shelf-row::-webkit-scrollbar-track { background: #333; }
 
-    /* --- Modal Specific Styles --- */
-    .modal-content { 
-        background-color: #2c2f33; /* Dark background for modal */
-        color: white; 
-        border: 1px solid #444; /* Subtle border */
-        border-radius: 10px; /* Slightly more rounded corners */
+    /* Modal Specific Styles */
+    .modal-content {
+        background-color: #2c2f33;
+        color: white;
+        border: 1px solid #444;
+        border-radius: 10px;
     }
-    .modal-header {
-        border-bottom: 1px solid #444; /* Darker border for separation */
-        padding: 15px 20px;
-    }
-    .modal-title {
-        color: #e50914; /* Netflix red for title */
-        font-weight: bold;
-    }
-    .btn-close {
-        filter: invert(1); /* Makes the default dark close icon white */
-        opacity: 0.8;
-        transition: opacity 0.2s ease-in-out;
-    }
-    .btn-close:hover {
-        opacity: 1;
-    }
-    .modal-body {
-        padding: 20px;
-    }
-    .modal-body p, .modal-body h6, .modal-body label {
-        color: #ddd; /* Lighter grey for text for readability */
-    }
-    .modal-body strong {
-        color: #fff; /* White for strong labels */
-    }
-    .modal-body hr {
-        border-top: 1px solid #444; /* Separator color */
-        margin: 20px 0;
-    }
+    .modal-header { border-bottom: 1px solid #444; padding: 15px 20px; }
+    .modal-title { color: #e50914; font-weight: bold; }
+    .btn-close { filter: invert(1); opacity: 0.8; transition: opacity 0.2s ease-in-out; }
+    .btn-close:hover { opacity: 1; }
+    .modal-body { padding: 20px; }
+    .modal-body p, .modal-body h6, .modal-body label { color: #ddd; }
+    .modal-body strong { color: #fff; }
+    .modal-body hr { border-top: 1px solid #444; margin: 20px 0; }
+
     /* Input/Select within modal */
-    .form-control, .form-select { 
-        background-color: #343a40; /* Darker input background */
-        color: #fff; 
-        border: 1px solid #555; /* Subtle border for inputs */
+    .form-control, .form-select {
+        background-color: #343a40;
+        color: #fff;
+        border: 1px solid #555;
         border-radius: 5px;
         padding: 8px 12px;
     }
-    .form-control:focus, .form-select:focus { 
-        background-color: #3c3f44; 
-        color: #fff; 
-        border-color: #e50914; /* Highlight focus with accent color */
-        box-shadow: 0 0 0 0.25rem rgba(229, 9, 20, 0.25); /* Glow effect */
+    .form-control:focus, .form-select:focus {
+        background-color: #3c3f44;
+        color: #fff;
+        border-color: #e50914;
+        box-shadow: 0 0 0 0.25rem rgba(229, 9, 20, 0.25);
     }
+
     .badge.bg-secondary {
-        background-color: #4a4a4a !important; /* Slightly distinct badge color */
+        background-color: #4a4a4a !important;
         color: #eee;
     }
+
     .btn-warning {
-        background-color: #f5c518; /* IMDb yellow for the button */
+        background-color: #f5c518;
         border-color: #f5c518;
-        color: #1a1a1a; /* Dark text for contrast */
+        color: #1a1a1a;
         font-weight: bold;
         transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
     }
     .btn-warning:hover {
-        background-color: #e0b007; /* Slightly darker yellow on hover */
+        background-color: #e0b007;
         border-color: #e0b007;
     }
+
     .review-message {
         margin-top: 10px;
         font-style: italic;
     }
+
+    /* Star rating-specific styles */
+    .star-rating {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        user-select: none;
+    }
+    .star-rating .star {
+        color: #777;
+        transition: color 0.15s ease-in-out, transform 0.08s;
+        padding: 2px;
+    }
+    .star-rating .star.filled {
+        color: #f5c518; /* IMDb yellow */
+    }
+    .star-rating .star:hover {
+        transform: scale(1.05);
+    }
+
+    /* Make sure hidden input isn't visible */
+    input.rating-input { display: none; }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container-fluid" style="background-color: #141414; padding-top: 50px;">
-    
     <div class="container mb-5">
         <h1 class="text-center mb-4 text-warning">🎬 Explore New Releases</h1>
         {% if movies|length > 0 %}
@@ -139,38 +148,10 @@
 
     <hr style="border-top: 1px solid #333;">
 
-    <div id="dynamic-shelves-container" class="container">
-        </div>
-
-    <div class="container shelf-container">
-        <h3 class="shelf-title">All Movies List (A-Z)</h3>
-        {% if movies %}
-            <div class="row">
-                {% for movie in movies %}
-                    {# This uses the old grid display but adapted to the new card style #}
-                    {% with user_review=user_reviews_dict|get_item:movie.id %}
-                    <div class="col-6 col-md-3 col-lg-2 mb-4">
-                        <div class="card movie-card h-100" data-bs-toggle="modal" data-bs-target="#movieModal{{ movie.id }}">
-                            {% if movie.poster %}
-                                <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" class="movie-poster">
-                            {% else %}
-                                <img src="{% static 'default_poster.jpg' %}" alt="No poster" class="movie-poster">
-                            {% endif %}
-                            <div class="card-body p-2">
-                                <h6 class="card-title text-light text-truncate">{{ movie.title }}</h6>
-                            </div>
-                        </div>
-                    </div>
-                    {% endwith %}
-                {% endfor %}
-            </div>
-        {% else %}
-            <p class="text-center text-muted">No movies found in the database.</p>
-        {% endif %}
-    </div>
-
+    <div id="dynamic-shelves-container" class="container"></div>
 </div>
 
+{# Modal blocks for each movie #}
 {% for movie in movies %}
     {% with user_review=user_reviews_dict|get_item:movie.id %}
         <div class="modal fade" id="movieModal{{ movie.id }}" tabindex="-1" aria-labelledby="movieModalLabel{{ movie.id }}" aria-hidden="true">
@@ -180,6 +161,7 @@
                         <h5 class="modal-title" id="movieModalLabel{{ movie.id }}">{{ movie.title }}</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-5">
@@ -194,8 +176,8 @@
                                     {% endfor %}
                                 </p>
                             </div>
+
                             <div class="col-md-7">
-                                
                                 <p><strong>Director:</strong> {{ movie.director.name }}</p>
                                 <p><strong>Release Date:</strong> {{ movie.release_date|date:"F j, Y" }}</p>
                                 <p><strong>Synopsis:</strong> {{ movie.synopsis }}</p>
@@ -206,18 +188,25 @@
 
                                 <form class="review-form" data-movie-id="{{ movie.id }}">
                                     {% csrf_token %}
+                                    <!-- Star rating UI (hidden numeric input stored in .rating-input) -->
                                     <div class="mb-3">
-                                        <label for="rating{{ movie.id }}" class="form-label">Rating (1–5)</label>
-                                        <select name="rating" id="rating{{ movie.id }}" class="form-select" required>
+                                        <label class="form-label">Your Rating</label>
+                                        <div class="star-rating" data-selected-rating="{% if user_review %}{{ user_review.rating }}{% else %}0{% endif %}">
+                                            {# Render 5 stars; each has data-value 1..5 #}
                                             {% for i in "12345" %}
-                                                <option value="{{ forloop.counter }}" {% if user_review and user_review.rating == forloop.counter %}selected{% endif %}>{{ forloop.counter }}</option>
+                                                <i class="fa-regular fa-star star" data-value="{{ forloop.counter }}" role="button" aria-label="Rate {{ forloop.counter }}"></i>
                                             {% endfor %}
-                                        </select>
+                                        </div>
+
+                                        <!-- This hidden input will hold the numeric rating (supports halves) -->
+                                        <input type="hidden" name="rating" class="rating-input" value="{% if user_review %}{{ user_review.rating }}{% else %}0{% endif %}">
                                     </div>
+
                                     <div class="mb-3">
                                         <label for="review_text{{ movie.id }}" class="form-label">Your Review</label>
                                         <textarea name="review_text" id="review_text{{ movie.id }}" class="form-control" rows="3" required>{% if user_review %}{{ user_review.review_text }}{% endif %}</textarea>
                                     </div>
+
                                     <button type="submit" class="btn btn-warning">Submit Review</button>
                                 </form>
 
@@ -225,166 +214,236 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     {% endwith %}
 {% endfor %}
+
 {% endblock %}
 
 {% block extra_js %}
 <script>
-// Utility function to get CSRF token
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+/* Utility: get CSRF token from cookie (Django default) */
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
         }
+        return cookieValue;
     }
-    return cookieValue;
-}
 
-document.addEventListener("DOMContentLoaded", () => {
-    const csrfToken = getCookie('csrftoken');
-    const container = document.getElementById('dynamic-shelves-container');
-
-    // --- 1. Review Submission Logic (Kept mostly the same) ---
-    const forms = document.querySelectorAll(".review-form");
-    forms.forEach(form => {
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const movieId = form.dataset.movieId;
-            const rating = form.querySelector("[name='rating']").value;
-            const reviewText = form.querySelector("[name='review_text']").value;
-            const messageDiv = form.parentElement.querySelector(".review-message");
-
-            try {
-                const response = await fetch(`/api/movies/${movieId}/reviews/`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": csrfToken,
-                    },
-                    body: JSON.stringify({ rating, review_text: reviewText })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    messageDiv.textContent = data.message;
-                    messageDiv.style.color = "lightgreen";
-                    setTimeout(() => location.reload(), 1000); 
-                } else {
-                    messageDiv.textContent = data.error || "An error occurred.";
-                    messageDiv.style.color = "red";
-                }
-
-            } catch (err) {
-                messageDiv.textContent = "An unexpected error occurred.";
-                messageDiv.style.color = "red";
+    /* Update star icons based on rating (supports half-stars) */
+    function renderStarsForContainer(container, rating) {
+        const stars = container.querySelectorAll(".star");
+        stars.forEach(star => {
+            const val = parseInt(star.dataset.value, 10);
+            // full star if rating >= val
+            if (rating >= val) {
+                star.classList.remove("fa-regular", "fa-star-half-stroke");
+                star.classList.add("fa-solid", "fa-star", "filled");
+            }
+            // half star if rating >= val - 0.5
+            else if (rating >= (val - 0.5)) {
+                // Use half star icon
+                star.classList.remove("fa-regular", "fa-star");
+                star.classList.add("fa-solid", "fa-star-half-stroke", "filled");
+            } else {
+                // empty star
+                star.classList.remove("fa-solid", "fa-star", "fa-star-half-stroke", "filled");
+                star.classList.add("fa-regular", "fa-star");
             }
         });
-    });
+    }
 
-    // --- 2. Dynamic Shelf Generation Logic ---
-    
-    // Function to fetch data from an API endpoint
-    async function fetchAPI(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        } catch (error) {
-            console.error(`Error fetching data from ${url}:`, error);
-            return [];
+    /* Initialize star rating widgets for all containers */
+    function initStarRatings() {
+        document.querySelectorAll(".star-rating").forEach(container => {
+            const stars = container.querySelectorAll(".star");
+            const hiddenInput = container.parentElement.querySelector(".rating-input");
+
+            // parse existing value (could be decimal string like "3.5")
+            let currentRating = parseFloat(hiddenInput.value) || 0;
+
+            // Initial render
+            renderStarsForContainer(container, currentRating);
+
+            // For mouse move and click detection, attach events to each star
+            stars.forEach(star => {
+                // Mouse move: show preview (half/full based on pointer position)
+                star.addEventListener("mousemove", function (e) {
+                    const rect = star.getBoundingClientRect();
+                    const isLeftHalf = (e.clientX - rect.left) < (rect.width / 2);
+                    const hoverRating = parseInt(star.dataset.value, 10) - (isLeftHalf ? 0.5 : 0);
+                    renderStarsForContainer(container, hoverRating);
+                });
+
+                // Click: set rating
+                star.addEventListener("click", function (e) {
+                    const rect = star.getBoundingClientRect();
+                    const isLeftHalf = (e.clientX - rect.left) < (rect.width / 2);
+                    currentRating = parseInt(star.dataset.value, 10) - (isLeftHalf ? 0.5 : 0);
+                    // write to hidden input (string)
+                    hiddenInput.value = currentRating.toFixed(1);
+                    renderStarsForContainer(container, currentRating);
+                });
+
+                // Accessibility: keyboard support for each star
+                star.addEventListener("keydown", function (e) {
+                    const val = parseInt(star.dataset.value, 10);
+                    if (e.key === "Enter" || e.key === " ") {
+                        currentRating = val;
+                        hiddenInput.value = currentRating.toFixed(1);
+                        renderStarsForContainer(container, currentRating);
+                        e.preventDefault();
+                    }
+                });
+
+                // Make stars focusable for keyboard
+                star.setAttribute("tabindex", "0");
+            });
+
+            // When leaving the star container, restore selected rating
+            container.addEventListener("mouseleave", function () {
+                renderStarsForContainer(container, currentRating);
+            });
+
+            // Also update UI if hiddenInput value is changed programmatically
+            // (not required now but good to keep)
+            const observer = new MutationObserver(() => {
+                currentRating = parseFloat(hiddenInput.value) || 0;
+                renderStarsForContainer(container, currentRating);
+            });
+            observer.observe(hiddenInput, { attributes: true, attributeFilter: ['value'] });
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const csrfToken = getCookie('csrftoken');
+
+        // Initialize star UI widgets
+        initStarRatings();
+
+        /* --- Review Submission Logic --- */
+        const forms = document.querySelectorAll(".review-form");
+        forms.forEach(form => {
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const movieId = form.dataset.movieId;
+                const rating = form.querySelector("[name='rating']").value;
+                const reviewText = form.querySelector("[name='review_text']").value;
+                const messageDiv = form.parentElement.querySelector(".review-message");
+
+                // Basic client-side validation
+                if (!rating || parseFloat(rating) <= 0) {
+                    messageDiv.textContent = "Please provide a rating (use the stars).";
+                    messageDiv.style.color = "orange";
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/movies/api/movies/${movieId}/reviews/`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": csrfToken,
+                        },
+                        body: JSON.stringify({ rating, review_text: reviewText })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        messageDiv.textContent = data.message || "Review submitted.";
+                        messageDiv.style.color = "lightgreen";
+                        // Slight delay so user sees the green message before reload
+                        setTimeout(() => location.reload(), 900);
+                    } else {
+                        messageDiv.textContent = data.error || "An error occurred while submitting the review.";
+                        messageDiv.style.color = "red";
+                    }
+                } catch (err) {
+                    console.error(err);
+                    messageDiv.textContent = "An unexpected error occurred.";
+                    messageDiv.style.color = "red";
+                }
+            });
+        });
+
+        /* --- Dynamic Shelf Generation Logic (keeps your previous approach) --- */
+
+        // Function to fetch data from an API endpoint
+        async function fetchAPI(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            } catch (error) {
+                console.error(`Error fetching data from ${url}:`, error);
+                return [];
+            }
         }
-    }
-    
-    // Function to fetch movies based on filter (Need a MovieFilterAPI for this in your views.py)
-    // NOTE: This assumes a new '/api/movies/filter/' endpoint that accepts type and id/name
-    async function fetchFilteredMovies(filterType, filterValue) {
-        // Since you don't have a generic filter API, let's simplify for demonstration.
-        // In a real app, you'd call: `/api/movies/?${filterType}=${filterValue}`
-        
-        // TEMPORARY: Since we can't filter movies via an API endpoint yet, 
-        // we'll fetch ALL movies and filter them client-side (inefficient for large data) 
-        // or just use one of the existing APIs as a stand-in.
-        
-        // For a proper solution, you MUST implement a Movie list API with filtering:
-        // class MovieFilterListAPIView(generics.ListAPIView):
-        //     def get_queryset(self):
-        //         queryset = Movie.objects.all()
-        //         tag_id = self.request.query_params.get('tag_id')
-        //         if tag_id:
-        //             queryset = queryset.filter(tags__id=tag_id)
-        //         ... (similarly for director_id, genre_id)
-        //         return queryset.order_by('?')[:10]
-        
-        // For now, we will skip filtering and just display a static random list if the filter is ready.
-        return await fetchAPI("{% url 'api_movie_list_create' %}?limit=10");
-    }
-    
-    // Function to render a single movie item
-    function renderMovieItem(movie) {
-        const posterUrl = movie.poster ? movie.poster.replace('/media/', '/media/') : "{% static 'default_poster.jpg' %}";
-        const title = movie.title;
 
-        return `
-            <div class="shelf-item">
-                <div class="card movie-card h-100" data-bs-toggle="modal" data-bs-target="#movieModal${movie.id}">
-                    <img src="${posterUrl}" alt="${title}" class="movie-poster">
-                    <div class="card-body p-2">
-                        <h6 class="card-title text-light text-truncate" title="${title}">${title}</h6>
+        // Simplified filtered movies fetch - currently hits the generic list API and expects JSON
+        async function fetchFilteredMovies(filterType, filterValue) {
+            // Uses movie list endpoint; adjust or replace with a proper filtered endpoint on backend
+            return await fetchAPI("{% url 'api_movie_list_create' %}?limit=10");
+        }
+
+        function renderMovieItem(movie) {
+            const posterUrl = movie.poster ? movie.poster : "{% static 'default_poster.jpg' %}";
+            const title = movie.title || "Untitled";
+
+            return `
+                <div class="shelf-item">
+                    <div class="card movie-card h-100" data-bs-toggle="modal" data-bs-target="#movieModal${movie.id}">
+                        <img src="${posterUrl}" alt="${title}" class="movie-poster">
+                        <div class="card-body p-2">
+                            <h6 class="card-title text-light text-truncate" title="${title}">${title}</h6>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
-    }
+            `;
+        }
 
-    // Function to render a dynamic shelf
-    async function renderShelf(title, endpoint, filterType) {
-        const filters = await fetchAPI(endpoint);
-        
-        if (filters.length === 0) return;
+        async function renderShelf(title, endpoint, filterType) {
+            const filters = await fetchAPI(endpoint);
+            if (!Array.isArray(filters) || filters.length === 0) return;
 
-        // Choose a random filter from the list
-        const randomFilter = filters[Math.floor(Math.random() * filters.length)];
-        const filterName = randomFilter.name;
-        const filterId = randomFilter.id;
-        
-        // Fetch movies based on the chosen filter (API endpoint required!)
-        // As noted, this is currently simplified and requires a proper filtered API
-        const movies = await fetchFilteredMovies(filterType, filterId);
-        
-        if (movies.length === 0) return;
+            const randomFilter = filters[Math.floor(Math.random() * filters.length)];
+            const filterName = randomFilter.name;
+            const filterId = randomFilter.id;
 
-        const shelfHTML = `
-            <div class="shelf-container">
-                <h3 class="shelf-title">${title} (${filterName})</h3>
-                <div class="shelf-row">
-                    ${movies.map(renderMovieItem).join('')}
+            const movies = await fetchFilteredMovies(filterType, filterId);
+            if (!Array.isArray(movies) || movies.length === 0) return;
+
+            const shelfHTML = `
+                <div class="shelf-container">
+                    <h3 class="shelf-title">${title} (${filterName})</h3>
+                    <div class="shelf-row">
+                        ${movies.map(renderMovieItem).join('')}
+                    </div>
                 </div>
-            </div>
-        `;
-        container.insertAdjacentHTML('beforeend', shelfHTML);
-    }
-    
-    // Load all the dynamic shelves
-    async function loadDynamicContent() {
-        await renderShelf("Trending Tags", "{% url 'api_random_tags' %}", "tag_id");
-        await renderShelf("Director Spotlight", "{% url 'api_random_directors' %}", "director_id");
-        await renderShelf("Genre Mix", "{% url 'api_random_genres' %}", "genre_id");
-        
-        // Optionally add a general 'New Releases' shelf here
-    }
+            `;
+            const container = document.getElementById('dynamic-shelves-container');
+            container.insertAdjacentHTML('beforeend', shelfHTML);
+        }
 
-    loadDynamicContent();
-});
+        async function loadDynamicContent() {
+            await renderShelf("Trending Tags", "{% url 'api_random_tags' %}", "tag_id");
+            await renderShelf("Director Spotlight", "{% url 'api_random_directors' %}", "director_id");
+            await renderShelf("Genre Mix", "{% url 'api_random_genres' %}", "genre_id");
+        }
+
+        loadDynamicContent();
+    });
 </script>
 {% endblock %}
