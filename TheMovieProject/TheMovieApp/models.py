@@ -17,7 +17,7 @@ class Tags(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=100)
     synopsis = models.TextField(null=True, blank=True)
-    poster = models.ImageField(upload_to='posters/', null=True, blank=True)
+    poster = models.URLField(null=True, blank=True)
     release_date = models.DateField(default=datetime.date.today)
     director = models.ForeignKey(Director, on_delete=models.CASCADE)
     genre = models.ManyToManyField(Genre)
