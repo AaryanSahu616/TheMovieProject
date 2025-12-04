@@ -20,6 +20,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('jet/', include('jet.urls', 'jet')),  # UI stuff
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Dashboard
     path('admin/', admin.site.urls),
     path('', include('AccountsApp.urls')),
     path('movies/', include('TheMovieApp.urls')),

@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -145,3 +147,5 @@ AUTH_USER_MODEL = 'AccountsApp.User'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+JET_DEFAULT_THEME = 'default'  # other options: 'green', 'light-gray'
+JET_SIDE_MENU_COMPACT = True
