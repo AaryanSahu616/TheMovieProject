@@ -21,6 +21,8 @@ ALLOWED_HOSTS = ['Arcade616.pythonanywhere.com']
 
 # Application definition
 INSTALLED_APPS = [
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -30,6 +32,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'AccountsApp',
     'TheMovieApp',
+    'crispy_forms',
+    'django_cotton',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +51,7 @@ ROOT_URLCONF = 'TheMovieProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # Add paths to templates here if needed
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -96,3 +100,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom user model
 AUTH_USER_MODEL = 'AccountsApp.User'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+JET_DEFAULT_THEME = 'default'  # other options: 'green', 'light-gray'
+JET_SIDE_MENU_COMPACT = True
