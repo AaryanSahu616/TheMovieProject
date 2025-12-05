@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'AccountsApp',
     'TheMovieApp',
     'crispy_forms',
+    'django_cotton',
 ]
 
 MIDDLEWARE = [

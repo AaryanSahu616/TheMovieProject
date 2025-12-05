@@ -1,0 +1,11 @@
+<c-vars title="Movie" poster="" movie_id="" />
+
+<div class="shelf-item">
+  <div class="card movie-card h-100" data-bs-toggle="modal" data-bs-target="#movieModal{{ movie_id }}">
+    <img src="{{ poster }}" class="movie-poster" alt="{{ title }}" />
+
+    <div class="card-body p-2">
+      <h6 class="card-title text-light text-truncate">{{ title }}</h6>
+    </div>
+  </div>
+</div>

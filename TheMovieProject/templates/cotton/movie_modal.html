@@ -1,0 +1,68 @@
+{% load static %}
+<c-vars movie=None user_review=None />
+
+<div class="modal fade" id="movieModal{{ movie.id }}" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title">{{ movie.title }}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            {% if movie.poster %}
+              <img src="{{ movie.poster }}" class="img-fluid rounded mb-3" />
+            {% else %}
+              <img src="{% static 'default_poster.jpg' %}" class="img-fluid rounded mb-3" />
+            {% endif %}
+
+            <p class="text-light small mt-2">
+              {% for tag in movie.tags.all %}
+                <span class="badge bg-secondary me-1">{{ tag.name }}</span>
+              {% endfor %}
+            </p>
+          </div>
+
+          <div class="col-md-7">
+            <p><strong>Director:</strong> {{ movie.director.name }}</p>
+            <p><strong>Release:</strong> {{ movie.release_date|date:"F j, Y" }}</p>
+            <p><strong>Synopsis:</strong> {{ movie.synopsis }}</p>
+
+            <p><strong>Genres:</strong>
+              {% for g in movie.genre.all %}
+                {{ g.name }}{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </p>
+
+            <hr>
+            <h6>{% if user_review %}Update Review{% else %}Add Review{% endif %}</h6>
+
+            <form class="review-form" data-movie-id="{{ movie.id }}">
+              {% csrf_token %}
+
+              <label>Your Rating</label>
+              <div class="star-rating" data-selected-rating="{{ user_review.rating|default:0 }}">
+                {% for i in "12345" %}
+                  <i class="fa-regular fa-star star" data-value="{{ forloop.counter }}"></i>
+                {% endfor %}
+              </div>
+
+              <input type="hidden" name="rating" class="rating-input" value="{{ user_review.rating|default:0 }}" />
+
+              <label>Your Review</label>
+              <textarea name="review_text" class="form-control" rows="3">{{ user_review.review_text }}</textarea>
+
+              <button class="btn btn-warning mt-3">Submit</button>
+            </form>
+
+            <div class="review-message text-light mt-2"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

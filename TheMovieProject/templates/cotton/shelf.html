@@ -1,0 +1,10 @@
+<c-vars title="Shelf" movies=[] />
+
+<div class="shelf-container">
+  <h3 class="shelf-title">{{ title }}</h3>
+  <div class="shelf-row">
+    {% for m in movies %}
+      <c-card :title="m.title" :poster="m.poster|default:static 'default_poster.jpg'" :movie_id="m.id" />
+    {% endfor %}
+  </div>
+</div>

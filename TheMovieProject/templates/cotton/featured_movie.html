@@ -1,0 +1,20 @@
+{% load static %}
+<c-vars movie=None />
+
+{% if movie %}
+<div class="p-5 rounded-3 shadow"
+     style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            url('{% if movie.poster %}{{ movie.poster }}{% else %}""{% endif %}');
+            background-size: cover; background-position: center;">
+
+  <h2 class="display-4 fw-bold text-white">{{ movie.title }}</h2>
+
+  <p class="col-md-8 fs-5 text-light text-truncate-2">
+    {{ movie.synopsis|default:"No synopsis available." }}
+  </p>
+
+  <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#movieModal{{ movie.id }}">
+    View Details & Review
+  </button>
+</div>
+{% endif %}
